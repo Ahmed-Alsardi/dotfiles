@@ -81,4 +81,10 @@ for plugin in "${plugins[@]}"; do
   fi
 done
 
+print_status "Switch to zsh"
+
+chsh -s /usr/bin/zsh $USERNAME
+
+exec zsh
+
 print_status "Installation complete! Please restart your terminal for changes to take effect."
