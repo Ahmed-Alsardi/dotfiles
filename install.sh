@@ -16,22 +16,27 @@ print_error() {
 
 # Define the plugins array in the order you want them to be installed
 plugins=(
-  "pyenv"
-  "nvm"
-  "golang"
-  "nvim"
-  "lazygit"
-  "lazyvim"
+  "pyenv.sh"
+  "nvm.sh"
+  "golang.sh"
+  "neovim.sh"
+  "lazygit.sh"
+  "lazyvim.sh"
   # Add more plugins in the order you want
 )
 
 # Update and upgrade system
 print_status "Updating and upgrading system packages..."
-sudo apt update && sudo apt upgrade -y
+apt update && apt upgrade -y
 
 # Install standard packages
 print_status "Installing standard packages..."
-sudo apt install -y curl git wget build-essential unzip vim tree zsh
+export DEBIAN_FRONTEND=noninteractive
+apt install -y curl git wget build-essential unzip vim tree zsh eza
+
+print_status "Setting timezone to Asia/Riyadh..."
+sudo ln -sf /usr/local/share/zoneinfo/Asia/Riyadh /etc/localtime
+sudo timedatectl set-timezone Asia/Riyadh
 
 # Change default shell to zsh
 print_status "Changing default shell to zsh..."
@@ -50,6 +55,7 @@ fi
 # Copy new .zshrc
 print_status "Installing new .zshrc..."
 cp "$(dirname "$0")/zshrc" "$HOME/.zshrc"
+# exec zsh
 
 # Install plugins in specified order
 print_status "Installing plugins..."
