@@ -17,8 +17,6 @@ print_error() {
 # Define the plugins array in the order you want them to be installed
 plugins=(
   "pyenv.sh"
-  "nvm.sh"
-  "golang.sh"
   "neovim.sh"
   "lazygit.sh"
   "lazyvim.sh"
