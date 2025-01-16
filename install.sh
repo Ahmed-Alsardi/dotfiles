@@ -16,10 +16,10 @@ print_error() {
 
 # Define the plugins array in the order you want them to be installed
 plugins=(
+  "neovim.sh"
   "pyenv.sh"
   "nvm.sh"
   "golang.sh"
-  "neovim.sh"
   "lazygit.sh"
   "lazyvim.sh"
   # Add more plugins in the order you want
@@ -33,6 +33,10 @@ apt update && apt upgrade -y
 print_status "Installing standard packages..."
 export DEBIAN_FRONTEND=noninteractive
 apt install -y curl git wget build-essential unzip vim tree zsh eza
+
+print_status "Switch to zsh"
+
+exec zsh
 
 print_status "Setting timezone to Asia/Riyadh..."
 sudo ln -sf /usr/local/share/zoneinfo/Asia/Riyadh /etc/localtime
@@ -80,11 +84,5 @@ for plugin in "${plugins[@]}"; do
     print_error "Plugin script for $plugin not found at $plugin_script"
   fi
 done
-
-print_status "Switch to zsh"
-
-chsh -s /usr/bin/zsh $USERNAME
-
-exec zsh
 
 print_status "Installation complete! Please restart your terminal for changes to take effect."
