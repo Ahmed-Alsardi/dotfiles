@@ -34,10 +34,6 @@ print_status "Installing standard packages..."
 export DEBIAN_FRONTEND=noninteractive
 apt install -y curl git wget build-essential unzip vim tree zsh eza
 
-print_status "Switch to zsh"
-
-exec zsh
-
 print_status "Setting timezone to Asia/Riyadh..."
 sudo ln -sf /usr/local/share/zoneinfo/Asia/Riyadh /etc/localtime
 sudo timedatectl set-timezone Asia/Riyadh
@@ -58,7 +54,7 @@ fi
 
 # Copy new .zshrc
 print_status "Installing new .zshrc..."
-cp "$(dirname "$0")/zshrc" "$HOME/.zshrc"
+cp "$(dirname "$0")/.zshrc" "$HOME/.zshrc"
 # exec zsh
 
 # Install plugins in specified order
@@ -84,5 +80,9 @@ for plugin in "${plugins[@]}"; do
     print_error "Plugin script for $plugin not found at $plugin_script"
   fi
 done
+
+print_status "Switch to zsh"
+
+exec zsh
 
 print_status "Installation complete! Please restart your terminal for changes to take effect."
