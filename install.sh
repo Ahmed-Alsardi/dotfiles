@@ -55,6 +55,17 @@ fi
 # Copy new .zshrc
 print_status "Installing new .zshrc..."
 cp "$(dirname "$0")/.zshrc" "$HOME/.zshrc"
+
+# Backup existing .zshrc if it exists
+if [ -f "$HOME/.p10k.zsh" ]; then
+  print_status "Backing up existing .zshrc..."
+  mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.backup"
+fi
+
+# Copy new .p10k.zsh
+print_status "Installing new .p10k.zsh..."
+cp "$(dirname "$0")/.p10k.zsh" "$HOME/.p10k.zsh"
+
 # exec zsh
 
 # Install plugins in specified order
